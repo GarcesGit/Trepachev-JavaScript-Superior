@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+		// Collections Map & Set
+
+
+
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+
+		<script>
+		//Существует специальный метод Array.isArray, который возвращает true, если параметром ему передан массив, и false в остальных случаях
+		let elems = document.querySelectorAll('p');
+		console.log(Array.isArray(elems)); // выведет false
+		</script>
+
+		<script>
+		//получите псевдомассив элементов. Преобразуйте его в массив тремя описанными способами.
+		let elems = document.querySelectorAll('p');
+		console.log(elems); // NodeList(5) [p, p, p, p, p]
+
+		let arr1 = [];
+		for (let p of elems) {
+		  arr1.push(p);
+		}
+		console.log(arr1); //[p, p, p, p, p]
+
+		let arr2 = [...elems];
+		console.log(arr2); //[p, p, p, p, p]
+
+		let arr3 = Array.from(elems);
+		console.log(arr3); //[p, p, p, p, p]
+		</script>
+
+		<script>
+		//С помощью метода slice получите все абзацы, кроме первого и последнего.
+		let elems = document.querySelectorAll('p');
+
+		let arr3 = Array.from(elems);
+		arr4 = arr3.slice(1,4);
+		console.log(arr4); //[p, p, p]
+		</script>
+
+		<script>
+		//Создайте коллекцию Map, сделайте ключами коллекции эти массивы, а значениями - какие-нибудь строки.
+		let map = new Map;
+
+		let arr1 = [1, 2];
+		let arr2 = [3, 4];
+
+		map.set(arr1, 'data1');
+		map.set(arr2, 'data2');
+
+		console.log(map.get(arr1)); //data1
+		console.log(map.get(arr2)); //data2
+		console.log(map.entries(arr1)); //key: [1, 2] value: "data1"
+		console.log(map.entries(arr2)); //key: [3, 4] value: "data2"
+		</script>
+
+		<script>
+		//Создайте коллекцию Map, сделайте ключами коллекции объекты, а значениями - соответствующие массивы.
+		let map = new Map();
+		let obj = {a: 1, b: 2, c: 3};
+		let arr = [1, 2, 3];
+
+		map.set(obj, arr);
+		console.log(map.keys()); //{a: 1, b: 2, c: 3}
+		console.log(map.values());//[1, 2, 3]
+		console.log(map.entries(obj)); //key: {a: 1, b: 2, c: 3} value: (3) [1, 2, 3]
+		</script>
+
+		<script>
+		//коллекцию Map можно перебрать с помощью цикла for-of. При этом в elem будут попадать массивы пар ключ-значение.
+		let map = new Map;
+		let arr1 = [1, 2];
+		let arr2 = [3, 4];
+		map.set(arr1, 'data1');
+		map.set(arr2, 'data2');
+
+		for (let elem of map) {
+			console.log(elem); //[Array(2), 'data1'] //[Array(2), 'data2']
+		}
+
+		//Можно отделить ключи и значения с помощью деструктуризации:
+		for (let [key, elem] of map) {
+			console.log(key); //[1, 2] //[3, 4]
+			console.log(elem); //data1 //data2
+		}
+		</script>
+
+		<script>
+		//Пусть дана коллекция Map. Получите массив ее ключей и значений и переберите их циклом for-of.
+		let map = new Map;
+		let key1 = 'one';
+		let key2 = 'two';
+		let key3 = 'three';
+		map.set(key1, 'data1');
+		map.set(key2, 'data2');
+		map.set(key3, 'data3');
+
+		for (let elem of map) {
+			console.log(map.keys()); //{'one', 'two', 'three'}
+		  console.log(map.values());//{'data1', 'data2', 'data3'}
+		}
+		</script>
+
+
+		<input>
+		<input>
+		<input>
+
+		<script>
+		//Даны инпуты. Переберите эти инпуты циклом и создайте коллекцию Map, ключами в которой будут инпуты, а значением - их порядковый номер на странице. Сделайте так, чтобы по клику на любой инпут ему в value записывался его порядковый номер.
+		let elems = document.querySelectorAll('input');
+		let map = new Map;
+
+		let i = 1;
+		for (let elem of elems) {
+		map.set(elem, i++);
+
+		  elem.addEventListener('click', function () {
+		    this.value = this.value + map.get(this);//=map.values
+		  });
+		}
+		</script>
+
+
+		//!!!!!!!! Даны инпуты. В каждый инпут можно ввести число. Пусть по нажатию на Enter инпут запоминает введенное число. Сделайте так, чтобы по потери фокуса в инпуте в консоль выводился массив всех введенных ранее в инпут чисел.
+		<input><br><br>
+		<input><br><br>
+		<input>
+
+		<script>
+		  let elems = document.querySelectorAll('input');
+		  let map = new Map;
+
+		  for (let elem of elems) {
+		    let values = [];
+		  	map.set(elem, values);
+
+		    elem.addEventListener('keypress', function () {
+		      if (event.key == 'Enter') {
+		  		values = map.get(this);
+		  		values.push(this.value);
+
+		  		map.set(this, values);
+
+		  		this.value = '';
+
+		  		console.log(map.get(this));
+		    }
+		    });
+		  }
+		</script>
+
+
+		<script>
+		//С помощью этого массива создаейте коллекцию Set.
+
+		let arr = [1, 2, 3, 1, 3, 4];
+		let set = new Set(arr);
+		console.log(set); // {1, 2, 3, 4}
+		</script>
+
+		<script>
+		//Создайте пустую коллекцию Set. С помощью метода add добавьте в нее элементы со значениями 1, 2 и 3.
+		//Выведите на экран количество элементов в коллекции.
+		//Проверьте наличие в коллекции элемента со значением 3, а затем элемента со значением 4.
+
+		let set = new Set();
+		set.add(1);
+		set.add(2);
+		set.add(3);
+		console.log(set); // {1, 2, 3}
+		console.log(set.size); //3
+		console.log(set.has(4)); //false
+		</script>
+
+		<script>
+		//Создайте коллекцию Set с какими-нибудь числами. Переберите эту коллекцию циклом и найдите сумму ее элементов.
+
+		let set = new Set();
+		set.add(1);
+		set.add(2);
+		set.add(3);
+		let sum = 0;
+		for (let elem of set) {
+		  sum += elem;
+		}
+		console.log(sum); //6
+		</script>
+
+		<script>
+		//Дана коллекция Set. Преобразуйте ее в массив двумя описанными способами.
+
+		let set = new Set([1, 2, 3]);
+		let arr = [...set];
+		let arr2 = Array.from(set);
+		console.log(arr); //[1, 2, 3]
+		console.log(arr2); //[1, 2, 3]
+		</script>
+
+		<script>
+		//Напишите функцию, которая параметром будет принимать массив и возвращать этот массив без дублей.
+
+		function uniqueNumbersArr(arr) {
+		  let set = new Set(arr);
+		  return [...new Set(arr)];
+		}
+		console.log(uniqueNumbersArr([1, 2, 3, 1, 3, 4, 5])); // [1, 2, 3, 4, 5]
+		</script>
+
+
+		//Получение дом элементов без дублей
+		<p>aaa</p>
+		<p>bbb</p>
+		<p>ccc</p>
+		<p>ddd</p>
+		<p>eee</p>
+
+		<button>click me</button>
+
+		<script>
+		let button = document.querySelector('button');
+		let elems  = document.querySelectorAll('p');
+
+		let set = new Set;
+
+		for (let elem of elems) {
+			elem.addEventListener('click', function() {
+			set.add(this);
+			});
+		}
+
+		button.addEventListener('click', function() {
+			for (let elem of set) {
+				elem.textContent = elem.textContent + '!';
+			}
+		});
+		</script>
+
+
+
+
+
+		<script>
+		let map = new Map();
+		map.set("1", "str1");    // строка в качестве ключа
+		map.set(1, "num1");      // цифра как ключ
+		map.set(true, "bool1");  // булево (логическое) значение true как ключ
+
+		console.log(map.get("1")); // "str1"
+		console.log(map.get(1));  // "num1"
+		console.log(map.get(true));  // "bool1"
+		console.log(map.size); // 3
+
+		let john = {name: 'John'};
+		let visitsCountMap = new Map(); // давайте сохраним количество посещений для каждого пользователя
+		visitsCountMap.set(john, 123);// объект john - это ключ для значения в объекте Map
+		console.log(visitsCountMap.get(john));//123
+
+		let map = new Map();
+		map.set("1", "str1")
+		  .set(1, "num1")
+		  .set(true, "bool1");
+		console.log(map); // {'1' => 'str1', 1 => 'num1', true => 'bool1'}
+
+
+		let recipeMap = new Map([
+		  ["огурец", 500],
+		  ["помидор", 350],
+		  ["лук",    50]
+		]);
+
+		for (let vegetable  of recipeMap.keys()){
+		  console.log(vegetable); // огурец, помидор, лук
+		}
+		for (let amount of recipeMap.values()){
+		  console.log(amount); // 500, 350, 50
+		}
+		for (let entry of recipeMap){
+		  console.log(entry); //['огурец', 500]...
+		}
+		console.log(recipeMap.entries());// MapIterator {'огурец' => 500, 'помидор' => 350, 'лук' => 50}
+
+		recipeMap.forEach((value, key, map) => {
+		console.log(`${key}: ${value}`); //огурец: 500 ...
+		});
+
+		// массив пар [ключ, значение]
+		let map = new Map([
+		  ['1',  'str1'],
+		  [1,    'num1'],
+		  [true, 'bool1']
+		]);
+		console.log( map.get('1') ); // str1
+
+		//Так что мы можем создать Map из обычного объекта следующим образом:
+		let obj = {
+		  name: "John",
+		  age: 30
+		};
+
+		let map = new Map(Object.entries(obj));
+		console.log( map.get('name') ); // John
+		//Здесь Object.entries возвращает массив пар ключ-значение: [ ["name","John"],
+
+		//метод Object.fromEntries, который делает противоположное: получив массив пар вида [ключ, значение], он создаёт из них объект:
+		let prices = Object.fromEntries([
+		  ['banana', 1],
+		  ['orange', 2],
+		  ['meat', 4]
+		]);
+		console.log (prices) // { banana: 1, orange: 2, meat: 4 }
+		console.log(prices.orange); // 2
+
+		//можем использовать Object.fromEntries, чтобы получить обычный объект из Map.
+		let map = new Map();
+		map.set('banana', 1);
+		map.set('orange', 2);
+		map.set('meat', 4);
+
+		let obj = Object.fromEntries(map.entries()); //ИЛИ
+		let obj2 = Object.fromEntries(map);
+		console.log(obj);// { banana: 1, orange: 2, meat: 4 }
+		</script>
+
+		<script>
+		// считаем гостей, некоторые приходят несколько раз
+		let set = new Set();
+		let john = { name: "John" };
+		let pete = { name: "Pete" };
+		let mary = { name: "Mary" };
+
+		set.add(john);
+		set.add(pete);
+		set.add(mary);
+		set.add(john);
+		set.add(mary);
+		// set хранит только 3 уникальных значения
+		console.log(set.size); // 3
+
+		for (let user of set) {
+		  console.log(user.name); // John (потом Pete и Mary)
+		}
+		</script>
+
+
+		<script>
+		let set = new Set(["апельсин", "яблоко", "банан"]);
+
+		for (let value of set) console.log(value); // апельсин", "яблоко", "банан
+
+		// то же самое с forEach:
+		set.forEach((value, valueAgain, set) => {
+		  console.log(value); // апельсин", "яблоко", "банан
+		});
+		</script>
+
+
+		<script>
+		//Создайте функцию unique(arr), которая вернёт массив уникальных, не повторяющихся значений массива arr.
+		//ЗАДАЧА21
+		let values = ["Hare", "Krishna", "Hare", "Krishna",
+		  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+		];
+
+		function unique(arr) {
+		  return Array.from(new Set(arr));
+		}
+		console.log(unique(values));
+		//['Hare', 'Krishna', ':-O']
+		</script>
+		//ИЛИ
+		<script>
+		function unique(arr) {
+		let set = new Set(arr);
+		  console.log(set);
+		}
+		unique(values);
+		//{'Hare', 'Krishna', ':-O'}
+		</script>
+
+
+		<script>
+		//ЗАДАЧА57
+		//Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+		let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+		function aclean(arr) {
+		let map = new Map();
+
+		for (let word of arr){
+		let sorted = word.toLowerCase().split('').sort().join('');
+		    map.set(sorted, word);//ключ = sorted, значение = word
+		  }
+		  return Array.from(map.values());
+		    }
+		console.log( aclean(arr) ); //['PAN', 'hectares', 'era']
+
+		//ИЛИ
+		function aclean(arr) {
+		  let obj = {};
+
+		  for (let i = 0; i < arr.length; i++) {
+		    let sorted = arr[i].toLowerCase().split("").sort().join("");
+		    obj[sorted] = arr[i]; //значение ключа sorted = arr[i] (anp: "nap")
+		  }
+		  return Object.values(obj);//берем значения ключей
+		}
+
+		let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+		console.log( aclean(arr) ); //['PAN', 'hectares', 'era'] !!!!!!!!
+		</script>
+
+
+		<script>
+		//получить массив ключей map.keys() в переменную и далее работать с ними
+		let map = new Map();
+		map.set("name", "John");
+		let keys = Array.from(map.keys());
+		keys.push("more");
+		console.log(keys); //['name', 'more']
+		</script>
+
+
+		<script>
+		//получить сортированный массив уникальных чисел из двух массивов
+		//ЗАДАЧА22
+
+		let arr1 = [7, 3, 6, 4,];
+		let arr2 = [1, 7, 3, 2, 5];
+		let arrCombi = [...arr1, ...arr2];
+		let sorted = arrCombi.sort();
+		let unique = Array.from(new Set(sorted));
+		console.log(unique); //[1, 2, 3, 4, 5]
+		</script>
+		//ИЛИ
+		<script>
+		function mergeArraysToUniqueNumbers(arr1, arr2) {
+		let arrCombi = [...arr1, ...arr2];
+		let sorted = arrCombi.sort();
+		let unique = Array.from(new Set(sorted));
+		return unique;
+		}
+		console.log(mergeArraysToUniqueNumbers([1, 2, 7, 4], [1, 6, 3, 4, 5]));
+		</script>
+
+
+		<script>
+		//получить сортированный массив уникальных чисел из массива
+		//ЗАДАЧА23
+
+		console.log(Array.from(new Set([1, 1, 6,2, 2, 3, 3, 7, 7, 4, 4, 5].sort())));
+		</script>
+
+
+
+
+  </body>
+</html>
