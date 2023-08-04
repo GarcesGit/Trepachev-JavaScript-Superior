@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+
+		// Работа с канвас <canvas> Работа с канвас <canvas> Работа с канвас <canvas> Работа с канвас <canvas> Работа с канвас <canvas>
+
+
+
+
+		//Начало работы с canvas
+		<canvas width="200" height="200"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		//необходимо применить метод getContext:
+		let ctx    = canvas.getContext('2d');
+
+		/*Можно упростить:
+		let ctx = document.querySelector('canvas').getContext('2d');*/
+
+		</script>
+
+
+		// Рисование линий через canvas
+		<canvas width="200" height="200" style="background: #f4f4f4;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		// Нарисуем линию
+		ctx.beginPath();
+		ctx.moveTo(50, 50);
+		ctx.lineTo(150, 50);
+		ctx.stroke();
+
+		//Нарисуем птичку
+		ctx.beginPath();
+		ctx.moveTo(50, 50);
+		ctx.lineTo(100, 100);
+		ctx.lineTo(150, 50);
+		ctx.stroke();
+
+		//Нарисуем квадратик
+		ctx.beginPath();
+		ctx.moveTo(50, 50);
+		ctx.lineTo(150, 50);
+		ctx.lineTo(150, 150);
+		ctx.lineTo(50, 150);
+		ctx.closePath();
+		ctx.stroke();
+
+		// Нарисуем крест Х
+		ctx.beginPath();
+		ctx.moveTo(50, 50);
+		ctx.lineTo(100, 100);
+		ctx.moveTo(100, 50);
+		ctx.lineTo(50, 100);
+
+		// Нарисуем стрелку
+		ctx.beginPath();
+		ctx.moveTo(0, 50);
+		ctx.lineTo(100, 50);
+		ctx.moveTo(75, 25);
+		ctx.lineTo(100, 50);
+		ctx.moveTo(75, 75);
+		ctx.lineTo(100, 50);
+		ctx.stroke();
+
+		</script>
+
+
+		// Замыкание фигур - нарисуем треугольник, используя closePath:
+		<canvas width="200" height="200" style="background: #f4f4f4;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.beginPath();
+		ctx.moveTo(50, 50);
+		ctx.lineTo(100, 100);
+		ctx.lineTo(150, 50);
+		//ctx.lineTo(50, 50); - этот шаг 	опускаем
+		ctx.closePath();
+		ctx.stroke();
+
+		</script>
+
+
+		//Метод fill - квадрат не полностью закрытый дорисуется и  закрасится
+		<canvas width="200" height="200" style="background: #f4f4f4;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.beginPath();
+		ctx.moveTo(50, 50);
+		ctx.lineTo(100, 100);
+		ctx.lineTo(150, 50);
+		//ctx.lineTo(50, 50); - этот шаг 	опускаем
+		//ctx.closePath(); - и этот тоже
+		ctx.fill();
+		//ctx.stroke(); - и этот тоже
+
+		</script>
+
+
+		//нарисуем прямоугольник с помощью strokeRect
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.strokeRect(50, 50, 75, 75);
+
+		</script>
+
+
+		//нарисуем закрашенный квадрат с помощью strokeRect
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.fillRect(50, 50, 75, 75);
+
+		</script>
+
+
+		//нарисуем квадрат с помощью rect и stroke
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.rect(50, 50, 75, 75);
+		ctx.stroke();
+
+		</script>
+
+
+		//нарисуем квадратик с помощью fillRect и сотрем из него часть с помощью clearRect
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.fillRect(50, 50, 100, 100);
+		ctx.clearRect(75, 75, 50, 50);
+
+		</script>
+
+
+		//Рисование окружностей
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		//Нарисуем окружность
+		ctx.arc(100, 100, 75, 0, getRadians(360));
+		ctx.stroke();
+
+		//Нарисуем половинку круга
+		ctx.arc(100, 100, 75, 0, getRadians(90));
+		ctx.fill();
+
+		function getRadians(degrees) {
+			return (Math.PI / 180) * degrees;
+		}
+		</script>
+
+
+		//Нарисуем месяц (x, y =центр, radius, начальный угол, конечный угол, по часовой стрелке от 270 до 90)
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.arc(100, 100, 55, getRadians(270), getRadians(90), true);
+		ctx.fill();
+
+
+		function getRadians(degrees) {
+			return (Math.PI / 180) * degrees;
+		}
+		</script>
+
+
+		//нарисуем контур с помощью rect и покрасим его в красный цвет:
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.rect(50, 50, 100, 100);
+		ctx.strokeStyle = 'red';
+		ctx.stroke();
+
+		</script>
+
+
+		//нарисуем квадратик с помощью rect и покрасим его в зеленый цвет:
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.rect(50, 50, 100, 100);
+		ctx.fillStyle = 'green';
+		ctx.fill();
+
+		</script>
+
+
+		//нарисуем квадраты разных цветов
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.fillStyle = 'green';
+		ctx.fillRect(50, 50, 50, 50);
+
+		ctx.fillStyle = 'red';
+		ctx.fillRect(50, 110, 50, 50);
+
+		ctx.fill();
+
+		</script>
+
+
+		//нарисуем контур квадрата жирный и цветной
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		ctx.beginPath();
+		ctx.lineWidth = 5; //толщина линии 5px
+		ctx.strokeStyle = 'green';
+		ctx.rect(50, 50, 100, 100);
+		ctx.stroke();
+
+		</script>
+
+
+		//цветная сетка для фона
+		<canvas width="200" height="200" style="background: ;"></canvas>
+
+		<script>
+		function draw() {
+		  var ctx = document.querySelector('canvas').getContext('2d');
+		  for (var i=0;i<6;i++){
+		    for (var j=0;j<6;j++){
+		      ctx.fillStyle = 'rgb(' + Math.floor(255-42.5*i) + ',' +
+		                       Math.floor(255-42.5*j) + ',0)';
+		      ctx.fillRect(j*25,i*25,25,25);
+		    }
+		  }
+		}
+		draw()
+		</script>
+
+
+		//нарисуем лини сетки с помощью цикла:
+		<canvas width="200" height="200" style="background: #B3F3B3;"></canvas>
+
+		<script>
+		let canvas = document.querySelector('canvas');
+		let ctx = canvas.getContext('2d');
+
+		for (let i = 1; i <= 10; i++) {
+			ctx.moveTo(15, 15 * i);
+			ctx.lineTo(150, 15 * i);
+		}
+		for (let j = 1; j <= 10; j++) {
+		  ctx.moveTo(15 * j, 15);
+			ctx.lineTo(15 * j, 150);
+		}
+		ctx.stroke();
+
+		</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
