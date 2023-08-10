@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+		//Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles Стилизация Styles
+
+
+
+
+		//Дан див и кнопка. По нажатию на кнопку задайте диву ширину в 400px, а высоту в 300px.
+		//Дана также кнопка. По клику на кнопку выведите ширину и высоту дива без единиц измерения.
+		//Дана также кнопка. По клику на кнопку выведите размер шрифта дива без единиц измерения.
+		<div style="font-size: 1.5em;"> text </div>
+		<button id="button1">click</button>
+
+		<script>
+		let div = document.querySelector('div');
+		let button1 = document.querySelector('#button1');
+
+		button1.addEventListener('click', function() {
+		  div.style.width = '400px';
+			div.style.height = '300px';
+			div.style.borderStyle = 'dotted';
+
+			console.log(parseFloat(div.style.width));
+			console.log(parseFloat(div.style.height));
+			console.log(parseFloat(div.style.fontSize));
+		});
+		</script>
+
+
+		//Дана также кнопка. По клику на кнопку увеличьте ширину и высоту дива на 10%.
+		<div id="elem" style="width: 300px; height: 200px; border: 1px solid red;">
+			text
+		</div>
+		<button id="button1">click</button>
+
+		<script>
+		let button1 = document.querySelector('#button1');
+		let elem = document.querySelector('div');
+
+		button1.addEventListener('click', function() {
+		let widthPx = elem.style.width;
+		let widthNm = parseInt(widthPx);
+		elem.style.width = (widthNm *1.1) + 'px';
+
+		let heightPx = elem.style.height;
+		let heightNm = parseInt(heightPx);
+		elem.style.height = (heightNm *1.1) + 'px';
+		});
+		</script>
+
+
+		//Дана также кнопка. По клику на кнопку выведите толщину границы, ее тип и цвет.
+		<div id="elem" style="width: 300px; height: 200px; border: 1px solid red;">
+			text
+		</div>
+		<button id="button1">click</button>
+
+		<script>
+		let button1 = document.querySelector('#button1');
+		let elem = document.querySelector('div');
+
+		button1.addEventListener('click', function() {
+		console.log(elem.style.borderWidth);
+		console.log(elem.style.borderStyle);
+		console.log(elem.style.borderColor);
+		});
+		</script>
+
+
+		//Дан див и две кнопки. По клику на первую кнопку спрячьте див, а по клику на вторую - покажите.
+		//Дан див и две кнопки. По клику на первую кнопку покрасьте цвет дива в красный цвет, а по клику на вторую - верните исходный цвет.
+		<div id="elem" style="width: 300px; height: 200px; border: 1px solid red;">
+			text
+		</div>
+		<button id="button1">hide</button>
+		<button id="button2">unhide</button>
+		<button id="button3">red</button>
+		<button id="button4">norm</button>
+
+		<script>
+		let button1 = document.querySelector('#button1');
+		let button2 = document.querySelector('#button2');
+		let button3 = document.querySelector('#button3');
+		let button4 = document.querySelector('#button4');
+		let elem = document.querySelector('#elem');
+
+		button1.addEventListener('click', function() {
+		elem.style.display = 'none';
+		});
+		button2.addEventListener('click', function() {
+		elem.style.display = '';
+		});
+		button3.addEventListener('click', function() {
+		elem.style.backgroundColor = 'red';
+		});
+		button4.addEventListener('click', function() {
+		elem.style.backgroundColor = '';
+		});
+		</script>
+
+
+		//Массовая установка стилей с cssText
+		<div id="elem" style="width: 30px; height: 30px; border: 1px solid red;">
+			text
+		</div>
+		<button id="button1">cssText</button>
+
+		<script>
+		let elem = document.querySelector('#elem');
+		let button1 = document.querySelector('#button1');
+
+		button1.addEventListener('click', function() {
+			elem.style.cssText = `
+				width: 100px;
+				height: 100px;
+				display: block;
+				margin: 10px auto;
+				color: red;
+				border: 1px solid green;
+			`;});
+		</script>
+
+
+		//Чтение свойств из CSS файлов с помощью специальной функции getComputedStyles()
+		<div id="elem">
+			text
+		</div>
+
+		<style>
+		#elem {
+			width: 100px;
+			color: rgb(255, 0, 0);
+			font-size: 20px;
+		}
+		</style>
+		<script>
+		let elem = document.querySelector('#elem');
+		let computedStyle = getComputedStyle(elem);
+
+		console.log(computedStyle.color); // выведет 'rgb(255, 0, 0)'
+		console.log(computedStyle.width); // выведет '100px'
+		console.log(computedStyle.fontSize); // выведет '20px'
+		</script>
+
+
+		//Функция getComputedStyles не получает именно те значения, которые были заданы в CSS. Она преобразует их в абсолютные значения, обычно в пиксели.
+		<div id="elem">
+			text
+		</div>
+
+		<style>
+		#elem {
+			font-size: 2em;
+		}
+		</style>
+		<script>
+		let elem = document.querySelector('#elem');
+		let computedStyle = getComputedStyle(elem);
+
+		console.log(computedStyle.fontSize); // выведет 32px
+		</script>
+
+
+		//Стилизация классами Стилизация классами
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+		<p>4</p>
+
+		<style>
+		.odd {
+			color: green;
+		}
+		.even {
+			color: red;
+		}
+		</style>
+		<script>
+		let elems = document.querySelectorAll('p');
+		for(let elem of elems){
+			if (elem.textContent % 2 !=0){
+				elem.classList.add('odd');
+			}else{
+				elem.classList.add('even');
+			}
+		}
+		</script>
+
+
+		//Один класс для стилизации через селектор :not
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+		<p>4</p>
+
+		<style>
+		.active {
+			color: red;
+		}
+		:not(active) {
+			color: black;
+		}
+		</style>
+		<script>
+		let elems = document.querySelectorAll('p');
+		for(let elem of elems){
+			elem.addEventListener('click', function (){
+				elem.classList.toggle('active');
+		});
+		}
+		</script>
+
+
+		//Чередование стилей через data- атрибут
+		<input data-type=" ">
+
+		<style>
+		[data-type="success"] {
+			color: green;
+		}
+		[data-type="warning"] {
+			color: orange;
+		}
+		[data-type="error"] {
+			color: red;
+		}
+		</style>
+		<script>
+		let elem = document.querySelector('input');
+			elem.addEventListener('blur', function (){
+				if (elem.value >=1 && elem.value <=9) {
+					elem.dataset.type = 'success';
+				} else if (elem.value >=10 && elem.value <=20) {
+					elem.dataset.type = 'warning';
+				} else {
+					elem.dataset.type = 'error';
+				}
+		});
+		</script>
+
+
+		//Размеры элемента Размеры элемента
+		<div id="elem">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elitorire. Aenean a dapibus magna, ac interdum nisl. Suspendisse egetil fringilla nibh, eu commodo arcu. Donec lacinia tempor velite sed tincidunt. Aliquam porttitor nulla purus, vel vulputater ipsum faucibus sed. Phasellus sodales, lorem vel cursus vehi ante purus lacini dui, interdum fringilla massa eros ut duir nullam et ipsum ex. Donec ut iaculis massa. Duis vel ulamcor per dolor. Suspendisse tristique dolor risus, nec laoreet du aliquet maximus. Maecenas tempus congue arcu, si amet auctoauctoauctoauctoauctoauctoauctoauctoa
+		</div>
+
+		<style>
+		#elem {
+			width: 300px;
+			height: 150px;
+			margin: 50px auto;
+			padding: 25px;
+			background: #CFF5BF;
+			border: 25px solid #F0D7A1;
+			overflow: auto;
+			text-align: justify;
+		}
+		</style>
+		<script>
+		let elem = document.querySelector('#elem');
+
+		console.log(elem.clientWidth);  // ширина клиентский размер элемента
+		console.log(elem.clientHeight); // высота клиентский размер элемента
+
+		console.log(elem.offsetWidth);  // ширина полный размер элемента
+		console.log(elem.offsetHeight); // высота полный размер элемента
+
+		console.log(elem.scrollWidth);  // ширина с учетом спрятанной под прокруткой части
+		console.log(elem.scrollHeight); // высота с учетом спрятанной под прокруткой части
+
+		console.log(elem.scrollTop);  // сверху на сколько прокручен элемент
+		console.log(elem.scrollLeft); // слева на сколько прокручен элемент
+		</script>
+
+
+		//Ширина полосы прокрутки зависит от браузера. Мы можем получить значение этой ширины.
+		<script>
+		let div = document.createElement('div');
+
+		div.style.overflowY = 'scroll';
+		div.style.width = '50px';
+		div.style.height = '50px';
+		document.body.append(div);
+
+		let scrollWidth = div.offsetWidth - div.clientWidth;
+		console.log(scrollWidth);
+		</script>
+
+
+		//Размеры окна браузера Размеры окна браузера
+		<script>
+		let clW = document.documentElement.clientWidth;  // ширина окна браузера, не включающие в себя полосу прокрутки
+		let clH = document.documentElement.clientHeight; // высота окна браузера, не включающие в себя полосу прокрутки
+
+		let inW = window.innerWidth;  // ширина включают в себя полосу прокрутки
+		let inH = window.innerHeight; // высота включают в себя полосу прокрутки
+		console.log(clW,clH,inW,inH);
+
+		let w1 = document.documentElement.clientWidth;
+		let w2 = window.innerWidth;
+		console.log(w2 - w1); //размер полосы прокрутки
+
+		let scrollHeight = Math.max(
+			document.body.scrollHeight, document.documentElement.scrollHeight,
+			document.body.offsetHeight, document.documentElement.offsetHeight,
+			document.body.clientHeight, document.documentElement.clientHeight
+		);
+		console.log(scrollHeight); //Высота с учетом прокрученной части
+
+		let scrollWidth = Math.max(
+			document.body.scrollWidth, document.documentElement.scrollWidth,
+			document.body.offsetWidth, document.documentElement.offsetWidth,
+			document.body.clientWidth, document.documentElement.clientWidth
+		);
+		console.log(scrollWidth);//Ширина с учетом прокрученной части
+
+		let x = window.pageXOffset; // сверху на сколько прокручено окно
+		let y = window.pageYOffset; // слева на сколько прокручено окно
+
+		let t = document.documentElement.scrollTop;  // сверху на сколько прокручено окно
+		let l = document.documentElement.scrollLeft; // слева на сколько прокручено окно
+		//Эти свойства можно изменять:
+		let topAdd = document.documentElement.scrollTop = 200;
+		console.log(topAdd);
+		</script>
+
+
+		//Методы для прокрутки окна
+		<script>
+		//Метод scrollTo прокручивает окно в заданное положение.
+		window.scrollTo(100, 200); //быстрая прокрутка окна в заданное положение
+
+		window.scrollTo({
+		  top: 100,
+		  left: 100,
+		  behavior: 'smooth'
+		}); //плавная прокрутка окна в заданное положение
+
+		//Метод scrollBy прокручивает окно на заданную величину от текущего положения.
+		window.scrollBy(-100, -200);//Выполним прокрутку в обратную сторону
+
+		window.scrollBy({
+			top: 100,
+			left: 100,
+			behavior: 'smooth'
+		}); //Выполним плавную прокрутку
+
+		//Метод scrollIntoView прокручивает окно к заданному элементу.
+		elem.scrollIntoView(true); //Прокрутим окно так, чтобы элемент был сверху окна
+		elem.scrollIntoView(false); //прокрутим окно так, чтобы элемент был снизу окна
+
+		elem.scrollIntoView({
+			behavior: 'smooth',
+		}); //плавно прокрутим окно к элементу
+		</script>
+
+
+		//Метод для прокрутки окна к элементу
+		Lorem ipsum dolor sit amet, consectetur adipiscing elitorire. Aenean a dapibus magna, ac interdum nisl. Suspendisse egetil fringilla nibh, eu commodo arcu. Donec lacinia tempor velite sed tincidunt. Aliquam porttitor nulla purus, vel vulputater ipsum faucibus sed. Phasellus sodales, lorem vel cursus vehi ante purus lacini dui, interdum fringilla massa eros ut duir nullam et ipsum ex. Donec ut iaculis massa. Duis vel ulamcor per dolor. Suspendisse tristique dolor risus, nec laoreet du aliquet maximus. Maecenas tempus congue arcu, si amet auctoauctoauctoauctoauctoauctoauctoauctoa
+		Lorem ipsum dolor sit amet, consectetur adipiscing elitorire. Aenean a dapibus magna, ac interdum nisl. Suspendisse egetil fringilla nibh, eu commodo arcu. Donec lacinia tempor velite sed tincidunt. Aliquam porttitor nulla purus, vel vulputater ipsum faucibus sed. Phasellus sodales, lorem vel cursus vehi ante purus lacini dui, interdum fringilla massa eros ut duir nullam et ipsum ex. Donec ut iaculis massa. Duis vel ulamcor per dolor. Suspendisse tristique dolor risus, nec laoreet du aliquet maximus. Maecenas tempus congue arcu, si amet auctoauctoauctoauctoauctoauctoauctoauctoa
+
+		<div id="elem">
+		Lorem ipsum dolor sit amet
+		</div>
+
+		<style>
+		#elem {
+			width: 300px;
+			height: 150px;
+			margin: 50px auto;
+			padding: 25px;
+			background: #CFF5BF;
+		}
+		</style>
+
+		<script>
+		let elem = document.querySelector('#elem');
+		elem.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+			inline: 'end',
+		});
+		</script>
+
+
+		//событие scroll, с помощью которого можно поймать момент, когда пользователь прокручивает окно
+		Lorem ipsum dolor sit amet, consectetur adipiscing elitorire. Aenean a dapibus magna, ac interdum nisl. Suspendisse egetil fringilla nibh, eu commodo arcu. Donec lacinia tempor velite sed tincidunt. Aliquam porttitor nulla purus, vel vulputater ipsum faucibus sed. Phasellus sodales, lorem vel cursus vehi ante purus lacini dui, interdum fringilla massa eros ut duir nullam et ipsum ex. Donec ut iaculis massa. Duis vel ulamcor per dolor. Suspendisse tristique dolor risus, nec laoreet du aliquet maximus. Maecenas tempus congue arcu, si amet auctoauctoauctoauctoauctoauctoauctoauctoa
+		Lorem ipsum dolor sit amet, consectetur adipiscing elitorire. Aenean a dapibus magna, ac interdum nisl. Suspendisse egetil fringilla nibh, eu commodo arcu. Donec lacinia tempor velite sed tincidunt. Aliquam porttitor nulla purus, vel vulputater ipsum faucibus sed. Phasellus sodales, lorem vel cursus vehi ante purus lacini dui, interdum fringilla massa eros ut duir nullam et ipsum ex. Donec ut iaculis massa. Duis vel ulamcor per dolor. Suspendisse tristique dolor risus, nec laoreet du aliquet maximus. Maecenas tempus congue arcu, si amet auctoauctoauctoauctoauctoauctoauctoauctoa
+
+		<script>
+		window.addEventListener('scroll', function() {
+			console.log('!');
+		});
+		</script>
+
+
+
+
+  </body>
+</html>
